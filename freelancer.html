@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Platform</title>
+    <script src="freelancer.js"></script>
+
+</head>
+<body>
+
+<h1>Freelancer Platform</h1>
+
+<ul id="freelancers-list"></ul>
+
+<p id="average-price">Average Starting Price: $0</p>
+
+<script>
+    // Initial freelancers
+    const freelancers = [
+        { name: 'Alice', occupation: 'Writer', startingPrice: 30 },
+        { name: 'Bob', occupation: 'Teacher', startingPrice: 50 },
+    ];
+
+    // Function to calculate and update average starting price
+    function updateAveragePrice() {
+        const totalPrices = freelancers.reduce((sum, freelancer) => sum + freelancer.startingPrice, 0);
+        const averagePrice = totalPrices / freelancers.length || 0;
+        document.getElementById('average-price').textContent = `Average Starting Price: $${averagePrice.toFixed(2)}`;
+    }
+
+    // Function to add a new freelancer
+    function addFreelancer(name, occupation, startingPrice) {
+        freelancers.push({ name, occupation, startingPrice });
+
+        // Update the freelancers list
+        const freelancersList = document.getElementById('freelancers-list');
+        const newFreelancerItem = document.createElement('li');
+        newFreelancerItem.textContent = `${name}, ${occupation}, Starting Price: $${startingPrice}`;
+        freelancersList.appendChild(newFreelancerItem);
+
+        // Update the average starting price
+        updateAveragePrice();
+    }
+
+    // Simulate new freelancers being added every few seconds
+    setInterval(() => {
+        const newFreelancer = { name: 'Carol', occupation: 'Programmer', 
+        startingPrice: Math.floor(Math.random() * 100) + 1 };
+        addFreelancer(newFreelancer.name, newFreelancer.occupation, newFreelancer.startingPrice);
+        
+    
+    
+    }, 5000); // Add a new freelancer every 3 seconds
+</script>
+
+</body>
